@@ -1,12 +1,12 @@
-'use client'
+"use client";
 
-import { PieChart, Pie, ResponsiveContainer } from 'recharts'
+import { PieChart, Pie, ResponsiveContainer } from "recharts";
 
 export interface DonutChartProps {
-    depositsTotal: number
-    expensesTotal: number
-    investmentsTotal: number
-    balance: number
+    depositsTotal: number;
+    expensesTotal: number;
+    investmentsTotal: number;
+    balance: number;
 }
 
 export function DonutChart({
@@ -18,39 +18,39 @@ export function DonutChart({
     // Dados monetários base
     const data = [
         {
-            name: 'Ganhos',
+            name: "Ganhos",
             value: Math.round(depositsTotal * 100) / 100,
-            fill: '#9333EA',
+            fill: "#9333EA",
         },
         {
-            name: 'Gastos',
+            name: "Gastos",
             value: Math.round(expensesTotal * 100) / 100,
-            fill: '#F43F5E',
+            fill: "#F43F5E",
         },
         {
-            name: 'Invest.',
+            name: "Invest.",
             value: Math.round(investmentsTotal * 100) / 100,
-            fill: '#3B82F6',
+            fill: "#3B82F6",
         },
-    ].filter((item) => item.value > 0)
+    ].filter((item) => item.value > 0);
 
     // Total baseado apenas no que está sendo exibido
-    const total = data.reduce((acc, item) => acc + item.value, 0)
+    const total = data.reduce((acc, item) => acc + item.value, 0);
 
     // Percentual individual
     const getPercent = (value: number) => {
-        return total > 0 ? Math.round((value / total) * 100) : 0
-    }
+        return total > 0 ? Math.round((value / total) * 100) : 0;
+    };
 
     // Percentual do saldo
-    const balancePercent = total > 0 ? Math.round((balance / total) * 100) : 0
+    const balancePercent = total > 0 ? Math.round((balance / total) * 100) : 0;
 
     if (data.length === 0) {
         return (
             <div className="w-full flex items-center justify-center py-16 text-muted-foreground">
                 <span className="text-sm">Nenhuma transação neste mês</span>
             </div>
-        )
+        );
     }
 
     return (
@@ -76,9 +76,9 @@ export function DonutChart({
                     <span className="text-xs text-muted-foreground">SALDO</span>
 
                     <span className="text-2xl font-bold">
-                        {balance.toLocaleString('pt-BR', {
-                            style: 'currency',
-                            currency: 'BRL',
+                        {balance.toLocaleString("pt-BR", {
+                            style: "currency",
+                            currency: "BRL",
                             maximumFractionDigits: 0,
                         })}
                     </span>
@@ -116,5 +116,5 @@ export function DonutChart({
                 ))}
             </div>
         </div>
-    )
+    );
 }
